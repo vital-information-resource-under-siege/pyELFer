@@ -18,5 +18,5 @@ python3 pyELFer.py -f (location of binary file name)
 python3 pyELFer.py -h 
 ```
 
-![help](https://github.com/vital-information-resource-under-siege/pyELFer/blob/main/images/pyELFer1.png)
+![help](https://github.com/vital-information-resource-under-siege/pyELFer/blob/main/images/pyELFer01.png)
 
