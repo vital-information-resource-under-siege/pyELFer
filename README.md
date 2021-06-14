@@ -11,3 +11,9 @@ cd pyELFer
 sh setup.sh
 python3 pyELFer.py -f (location of binary file name)
 ```
+
+#### Help:
+
+```
+python3 pyELFer.py -h 
+```
