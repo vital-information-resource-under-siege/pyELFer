@@ -11,7 +11,7 @@ from pwn import *
 
 def program_args():
     opt_parser = optparse.OptionParser()
-    opt_parser.add_option("-f","--FILE",help="FILE TO REVERSE",dest="file_name",default=False,metavar="FILE")
+    opt_parser.add_option("-f","--FILE",help="BINARY TO EXPLOIT",dest="file_name",default=False,metavar="FILE")
     (option,args) = opt_parser.parse_args()
     return (option,args)
 
