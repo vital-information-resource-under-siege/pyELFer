@@ -1,5 +1,9 @@
 # pyELFer
+
 ### A python tool to analyze and exploiting ELF Binaries
+
+#### Description
+
 This tool first runs some basic enumerations like using strings to group the printable characters in binary which includes some important information like User defined functions , Predefined functions ,Sections and Compiler generated functions,name of the source code compiled binary sysinfo and compiler info into /tmp/pyELFer/strings_for_(file_name).txt..
 
 Then proceeds to perform a ret2libc attack or ret2csu->ret2libc attack on binary both locally and remotely 
@@ -8,7 +12,7 @@ Then proceeds to perform a ret2libc attack or ret2csu->ret2libc attack on binary
 ```
 git clone https://github.com/vital-information-resource-under-siege/pyELFer.git
 cd pyELFer
-sh setup.sh
+sh setup.sh(for debian based OS only..For other distributions change setup.sh according to it) 
 python3 pyELFer.py -f (location of binary file name)
 ```
 
@@ -17,6 +21,9 @@ python3 pyELFer.py -f (location of binary file name)
 #### Demo Video Link
 
 [Demo working of the project](https://drive.google.com/file/d/1f60rCWNb7hfEfVbKVyMDi45ATOAlL5pt/view?usp=sharing)
+
+#### Steps to run the project:-
+
 The first input asked by the binary after specifying the binary in arguements and running the file is "Any extra input need to pass to point to the vulnerable buffer" if the binary straight away asks input to the vulnerable buffer do not give anythng and press enter if any other input or step needed to pass to point to the vulnerable buffer give that input here ..If any newlines occurs in the input ..Example if you want to give a option number(let's take 3 here) and newline to step to the vulnerable buffer give like this..
 
 ```
