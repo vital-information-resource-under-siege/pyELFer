@@ -244,7 +244,7 @@ def ret2libc_64(fl_name,base_addr):
             printf = True
         elif('write' in i):
             write = True
-    if(((gets == True) or (scanf == True)) and ((puts == True) or (printf == True))):
+    if(((gets == True) or (scanf == True) or (read == True)) and ((puts == True) or (printf == True))):
         e = ELF(fl_name)
         libc_location = "/lib/x86_64-linux-gnu/libc.so.6"
         libc = ELF(libc_location)
